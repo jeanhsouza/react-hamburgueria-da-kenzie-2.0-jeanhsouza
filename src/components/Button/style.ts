@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 interface iStyledButtonProps {
 	buttonSize: "default" | "medium";
-	buttonStyle: "brand1" | "solid1";
+	buttonStyle: "brand1" | "solid1" | "solid2";
 }
 
 export const StyledButton = styled.button<iStyledButtonProps>`
@@ -48,6 +48,16 @@ export const StyledButton = styled.button<iStyledButtonProps>`
 						color: var(--white100);
 					}
 				`;
+			case "solid2":
+				return css`
+					background: var(--gray300);
+					color: var(--gray200);
+
+					&:hover {
+						background: var(--brand100);
+						color: var(--white100);
+					}
+				`;	
 		}
 	}}
 `;
