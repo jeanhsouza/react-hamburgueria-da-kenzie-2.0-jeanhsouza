@@ -5,19 +5,20 @@ import { StyledAcessSection, StyledCoverSection, StyledLogin } from "./style";
 import { Input } from "../../components/Input";
 import { Form } from "../../components/Form";
 import { Button } from "../../components/Button";
-import { useNavigate } from "react-router-dom";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "./loginSchema";
-import { api } from "../../services/api";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext/AuthContext";
 
-interface iLoginFormData {
+export interface iLoginFormData {
 	email: string;
 	password: string;
 }
 
 export function Login() {
-	const navigate = useNavigate();
+	const {loading, RegisterLink , submitLogin} = useContext(AuthContext)
+
 	const {
 		register,
 		handleSubmit,
@@ -26,31 +27,6 @@ export function Login() {
 		mode: "onBlur",
 		resolver: yupResolver(loginSchema),
 	});
-
-	function RegisterLink() {
-		navigate("/register");
-	}
-
-	const submitLogin: SubmitHandler<iLoginFormData> = async (data) => {
-		loginUser(data);
-		console.log(data);
-	};
-
-	async function loginUser(data: iLoginFormData) {
-		try {
-			const request = await api.post("login", data);
-			const response = await request.data;
-
-			const { accessToken, user } = response;
-
-			localStorage.setItem("@kenzieBurger:token", accessToken);
-			localStorage.setItem("@kenzieBurger:userID", JSON.stringify(user));
-			navigate("/dashboard")
-
-		} catch (error) {
-			console.log(error);
-		}
-	}
 
 	return (
 		<StyledLogin>
@@ -73,6 +49,7 @@ export function Login() {
 						id="email"
 						type="text"
 						register={register("email")}
+						disabled={loading}
 					/>
 					{errors.email?.message && <span>{errors.email.message}</span>}
 					<Input
@@ -80,6 +57,7 @@ export function Login() {
 						id="password"
 						type="password"
 						register={register("password")}
+						disabled={loading}
 					/>
 					{errors.password?.message && <span>{errors.password.message}</span>}
 					<Button type="submit" buttonSize="medium" buttonStyle="brand1">

@@ -1,16 +1,18 @@
+import { UseFormRegisterReturn } from "react-hook-form";
 import { StyledInput } from "./style";
 
 interface iInputProps {
     label:string;
     id:string;
     type:string;
-	register?: any;
+	register?: UseFormRegisterReturn<string>;
+	disabled?: boolean;
 }
 
-export function Input({label, id, type, register}:iInputProps) {
+export function Input({label, id, type, register, disabled}:iInputProps) {
 	return (
 		<StyledInput>
-			<input type={type} id={id} placeholder=" " {...register}/>
+			<input type={type} id={id} placeholder=" " {...register} disabled={disabled}/>
 			<label>{label}</label>
 		</StyledInput>
 	);

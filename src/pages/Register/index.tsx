@@ -5,13 +5,14 @@ import { StyledAcessSection, StyledCoverSection, StyledRegister } from "./style"
 import { Input } from "../../components/Input";
 import { Form } from "../../components/Form";
 import { Button } from "../../components/Button";
-import { Link, useNavigate } from "react-router-dom";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchema } from "./registerSchema";
-import { api } from "../../services/api";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext/AuthContext";
 
-interface iRegisterFormData {
+export interface iRegisterFormData {
 	name: string;
 	email: string;
 	password: string;
@@ -20,7 +21,7 @@ interface iRegisterFormData {
 
 export function Register() {
 
-	const navigate = useNavigate()
+	const {loading, submitRegister} = useContext(AuthContext)
 
 	const {
 		register,
@@ -28,23 +29,7 @@ export function Register() {
 		formState: { errors },
 	} = useForm<iRegisterFormData>({ mode: "onBlur",resolver: yupResolver(registerSchema) });
 
-	const submitRegister: SubmitHandler<iRegisterFormData> = async (data) => {
-		delete data.samePassword;
-		registerUser(data)
-		console.log(data);
-	};
-
-	async function registerUser(data: iRegisterFormData) {
-		try {
-			const request = await api.post("users", data);
-			if(request){
-				navigate("/login")
-			}
-
-		} catch (error) {
-			console.log(error);
-		}
-	}
+	
 	
 	return <StyledRegister>
 		<StyledCoverSection>
@@ -61,13 +46,13 @@ export function Register() {
 				<Link to="/login">Retornar para o login</Link>
 			</div>
 			<Form submit={handleSubmit(submitRegister)}>
-				<Input label="Nome" id="name" type="text" register={register("name")}/>
+				<Input label="Nome" id="name" type="text" register={register("name")} disabled={loading}/>
 				{errors.name?.message && <span>{errors.name.message}</span>}
-				<Input label="Email" id="email" type="email" register={register("email")}/>
+				<Input label="Email" id="email" type="email" register={register("email")} disabled={loading}/>
 				{errors.email?.message && <span>{errors.email.message}</span>}
-				<Input label="Senha" id="password" type="password" register={register("password")}/>
+				<Input label="Senha" id="password" type="password" register={register("password")} disabled={loading}/>
 				{errors.password?.message && <span>{errors.password.message}</span>}
-				<Input label="Confirmar Senha" id="samePassword" type="password" register={register("samePassword")}/>
+				<Input label="Confirmar Senha" id="samePassword" type="password" register={register("samePassword") } disabled={loading}/>
 				{errors.samePassword?.message && <span>{errors.samePassword.message}</span>}
 				<Button type="submit" buttonSize="medium"
 					buttonStyle="solid1">Cadastrar</Button>
