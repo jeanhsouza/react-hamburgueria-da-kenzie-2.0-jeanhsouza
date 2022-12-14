@@ -4,10 +4,10 @@ type tButtonType = "button" | "submit" | "reset" | undefined;
 
 interface iButtonProps {
     children: React.ReactNode;
-    click: () => void;
+    click?: () => void;
     type: tButtonType;
-	buttonSize: string;
-	buttonStyle: string;
+	buttonSize: "default" | "medium";
+	buttonStyle: "brand1" | "solid1";
 
 }
 

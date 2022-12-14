@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components";
 
 interface iStyledButtonProps {
-	buttonSize: string;
-	buttonStyle: string;
+	buttonSize: "default" | "medium";
+	buttonStyle: "brand1" | "solid1";
 }
 
 export const StyledButton = styled.button<iStyledButtonProps>`

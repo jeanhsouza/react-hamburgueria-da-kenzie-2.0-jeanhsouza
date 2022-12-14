@@ -5,13 +5,51 @@ import { StyledAcessSection, StyledCoverSection, StyledLogin } from "./style";
 import { Input } from "../../components/Input";
 import { Form } from "../../components/Form";
 import { Button } from "../../components/Button";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { loginSchema } from "./loginSchema";
+import { api } from "../../services/api";
+
+interface iLoginFormData {
+	email: string;
+	password: string;
+}
 
 export function Login() {
-	const navigate = useNavigate()
+	const navigate = useNavigate();
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<iLoginFormData>({
+		mode: "onBlur",
+		resolver: yupResolver(loginSchema),
+	});
 
-	function RegisterLink(){
-		navigate("/register")
+	function RegisterLink() {
+		navigate("/register");
+	}
+
+	const submitLogin: SubmitHandler<iLoginFormData> = async (data) => {
+		loginUser(data);
+		console.log(data);
+	};
+
+	async function loginUser(data: iLoginFormData) {
+		try {
+			const request = await api.post("login", data);
+			const response = await request.data;
+
+			const { accessToken, user } = response;
+
+			localStorage.setItem("@kenzieBurger:token", accessToken);
+			localStorage.setItem("@kenzieBurger:userID", JSON.stringify(user));
+			navigate("/dashboard")
+
+		} catch (error) {
+			console.log(error);
+		}
 	}
 
 	return (
@@ -29,21 +67,22 @@ export function Login() {
 			</StyledCoverSection>
 			<StyledAcessSection>
 				<h2>Login</h2>
-				<Form
-					submit={() => {
-						console.log("oi");
-					}}
-				>
-					<Input label="Nome" id="name" type="text" />
-					<Input label="Senha" id="password" type="password" />
-					<Button
-						type="submit"
-						click={() => {
-							console.log("oi");
-						}}
-						buttonSize="medium"
-						buttonStyle="brand1"
-					>
+				<Form submit={handleSubmit(submitLogin)}>
+					<Input
+						label="Email"
+						id="email"
+						type="text"
+						register={register("email")}
+					/>
+					{errors.email?.message && <span>{errors.email.message}</span>}
+					<Input
+						label="Senha"
+						id="password"
+						type="password"
+						register={register("password")}
+					/>
+					{errors.password?.message && <span>{errors.password.message}</span>}
+					<Button type="submit" buttonSize="medium" buttonStyle="brand1">
 						Logar
 					</Button>
 				</Form>
@@ -51,14 +90,13 @@ export function Login() {
 					Crie sua conta para saborear muitas delícias e matar sua fome!
 				</span>
 				<Button
-						type="button"
-						click={RegisterLink}
-						buttonSize="medium"
-						buttonStyle="solid1"
-					>
-						Cadastrar
-					</Button>
-				
+					type="button"
+					click={RegisterLink}
+					buttonSize="medium"
+					buttonStyle="solid1"
+				>
+					Cadastrar
+				</Button>
 			</StyledAcessSection>
 		</StyledLogin>
 	);
