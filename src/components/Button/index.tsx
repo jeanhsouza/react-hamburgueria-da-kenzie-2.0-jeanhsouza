@@ -7,7 +7,7 @@ interface iButtonProps {
     click?: () => void;
     type: tButtonType;
 	buttonSize: "default" | "medium";
-	buttonStyle: "brand1" | "solid1";
+	buttonStyle: "brand1" | "solid1" | "solid2";
 
 }
 
