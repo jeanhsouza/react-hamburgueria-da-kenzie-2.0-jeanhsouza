@@ -19,7 +19,4 @@ export const registerSchema = yup.object().shape({
 		.required("O campo 'confirmar senha' é obrigatório.")
 		.matches(/^.{6,}$/, "A senha precisa ter pelo menos 6 caracteres")
 		.oneOf([yup.ref("password")], "As senhas devem ser iguais."),
-	bio: yup.string(),
-	contact: yup.string(),
-	course_module: yup.string().required("O campo 'Módulo' é obrigatório."),
 });
