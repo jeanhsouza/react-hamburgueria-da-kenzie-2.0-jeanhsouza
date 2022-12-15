@@ -10,6 +10,7 @@ export const ProtectedRoutes = () => {
     if(loading) {
         return null;
     }
+   
 
     return token ? <Outlet/> : <Navigate to='/' state={{ from: location }} />  
 }

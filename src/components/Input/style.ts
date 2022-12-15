@@ -4,8 +4,8 @@ export const StyledInput = styled.div`
 	position: relative;
 
 	> input {
-		background-color: var(--gray400);
-		border: 1px solid transparent;
+		background-color: var(--white100);
+		border: 2px solid var(--gray400);
 		border-radius: 5px;
 		outline: none;
 		min-width: 250px;
@@ -29,7 +29,7 @@ export const StyledInput = styled.div`
 	> label {
 		pointer-events: none;
 		position: absolute;
-		top: calc(32% - 8px);
+		top: calc(39% - 8px);
 		left: 15px;
 		transition: all 0.1s linear;
 		-webkit-transition: all 0.1s linear;
@@ -39,7 +39,7 @@ export const StyledInput = styled.div`
 		font-weight: var(--font-weight-3);
 		font-size: var(--font-size-4);
 		line-height: var(--line-height);
-		padding: 5px;
+		padding: 2px;
 		box-sizing: border-box;
 	}
 
@@ -53,7 +53,7 @@ export const StyledInput = styled.div`
 
 	> input:required:invalid + label:before {
 		content: "*";
-	}
+	}	
 
 	> input:focus + label,
 	> input:not(:placeholder-shown) + label {
