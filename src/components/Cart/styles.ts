@@ -1,37 +1,38 @@
 import styled from "styled-components";
 
 export const CartBox = styled.div`
-	margin-top: 30px;
-	margin-bottom: 30px;
-	margin-left: 40px;
-	width: 365px;
-	height: fit-content;
+	width: 100%;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 
 	.cartHeader {
 		display: flex;
 		align-items: center;
-		padding: 20px;
+		justify-content: space-between;
+		padding: 20px 10px;
 		height: 65px;
 		background-color: var(--brand100);
-		border-radius: 8px 8px 0px 0px;
-
 		> h2 {
 			font-weight: 700;
 			font-size: 18px;
 			line-height: 24px;
 			color: var(--gray400);
 		}
+
+		>button{
+			background-color: transparent;
+			color: var(--white100);
+		}
 	}
 
 	.Cart {
 		padding: 20px 10px;
+		height: 100%;
 		background-color: var(--gray400);
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
-		max-height: 300px;
 		overflow: auto;
 	}
 
@@ -57,8 +58,8 @@ export const CartBox = styled.div`
 		}
 	}
 
-	@media (max-width: 900px) {
+	@media (min-width: 900px) {
 		margin-left: 0px;
-		width: 100%;
+		width: 365px;
 	}
 `;

@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { iLoginFormData } from "../../pages/Login";
@@ -22,6 +22,12 @@ export function AuthProvider({ children }: iAuthContextProps ) {
     const [loading, setLoading] = useState(false);
     const [isLogged, setIsLogged] = useState(null);
     const navigate = useNavigate();
+
+	useEffect(()=>{
+		if(localStorage.getItem("@kenzieBurger:token")){
+			navigate("/dashboard")
+		}
+	},[navigate])
 
     function RegisterLink() {
 		navigate("/register");

@@ -7,7 +7,5 @@ export const StyledToastify = styled(ToastContainer)`
 	}
 
 	.Toastify__toast {
-		background-color: var(--gray200);
-		color: var(--gray500);
 	}
 `;

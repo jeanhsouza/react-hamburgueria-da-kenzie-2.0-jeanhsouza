@@ -2,11 +2,14 @@ import { CartProduct } from "./CartItem";
 import { TotalCart } from "./TotalCart";
 import { CartBox } from "./styles";
 
-export function Cart({ cart, setCart }) {
+export function Cart({ cart, setCart, setIsOpen }) {
+
+		
 	return (
 		<CartBox>
 			<div className="cartHeader">
 				<h2>Carrinho de compras</h2>
+				<button onClick={()=> setIsOpen(false)}>X</button>
 			</div>
 			<ul className="Cart">
 				{cart.length === 0 && (

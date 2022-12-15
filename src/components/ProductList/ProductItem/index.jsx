@@ -1,27 +1,33 @@
 import { Button } from "../../Button";
 import { StyledLi } from "./styles";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export function Product({ product, cart, setCart }) {
+	
 	function addCart() {
 		const cartContains = cart.find((elem) => {
-			return elem === product;
+			return elem.id === product.id;
 		});
 
-		cartContains !== product
-			? setCart((oldCart) => [...oldCart, product]) ||
-			  toast.success("Produto adicionado ao carrinho!", {
-					position: toast.POSITION.TOP_LEFT,
-			  })
-			: toast.error("Esse produto já foi adicionado ao carrinho!", {
-					position: toast.POSITION.TOP_LEFT,
-			  });
+		if (cartContains) {
+			const updatedCart = cart.map((elem) =>
+				elem.id === product.id ? { ...elem, count: elem.count + 1 } : elem
+			);
+			toast.success("Produto adicionado ao carrinho!", {
+				position: toast.POSITION.TOP_LEFT,
+			});
+			setCart(updatedCart);
+		} else {
+			toast.success("Produto adicionado ao carrinho!", {
+				position: toast.POSITION.TOP_LEFT,
+			});
+			setCart((oldCart) => [...oldCart, { ...product, count: 1 }]);
+		}
 	}
 
 	return (
 		<StyledLi>
-			<ToastContainer />
 			<div className="imgBox">
 				<img src={product.img} alt="" />
 			</div>
@@ -34,7 +40,9 @@ export function Product({ product, cart, setCart }) {
 						currency: "BRL",
 					})}
 				</span>
-				<Button buttonSize="medium" buttonStyle="solid2" click={addCart}>Adicionar</Button>
+				<Button buttonSize="medium" buttonStyle="solid2" click={addCart}>
+					Adicionar
+				</Button>
 			</div>
 		</StyledLi>
 	);

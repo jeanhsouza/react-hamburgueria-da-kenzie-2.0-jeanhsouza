@@ -6,7 +6,7 @@ export const StyledCartProduct = styled.li`
 	display: flex;
 	gap: 10px;
 
-	img {
+	> img {
 		background-color: var(--gray300);
 		border-radius: 8px;
 		width: 80px;
@@ -18,9 +18,13 @@ export const StyledCartProduct = styled.li`
 		align-items: flex-start;
 		justify-content: space-between;
 		width: 80%;
+
+		> img {
+			cursor: pointer;
+		}
 	}
 
-	.textProduct button {
+	.textProduct > button {
 		font-weight: 500;
 		font-size: 14px;
 		line-height: 15px;
@@ -28,7 +32,7 @@ export const StyledCartProduct = styled.li`
 		background-color: transparent;
 	}
 
-	.textProduct button:hover {
+	.textProduct > button:hover {
 		color: var(--gray100);
 		text-decoration: underline;
 	}
@@ -39,17 +43,40 @@ export const StyledCartProduct = styled.li`
 		gap: 1rem;
 	}
 
-	.textContent h3 {
+	.textContent > h3 {
 		font-weight: 700;
 		font-size: 16px;
 		line-height: 24px;
 		color: var(--gray100);
 	}
 
-	.textContent span {
+	.textContent > span {
 		font-weight: 400;
 		font-size: 14px;
 		line-height: 16px;
 		color: var(--gray200);
+	}
+
+	.counterCartItem {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 1px;
+		background-color: var(--gray300);
+		width: 120px;
+
+		> button {
+			color: var(--negative100);
+			font-size: 22px;
+			background-color: transparent;
+			padding: 0px 10px;
+		}
+
+		> span {
+			background-color: var(--white100);
+			padding: 5px 20px;
+			font-weight: var(--font-weight-3);
+			font-size: var(--font-size-4);
+		}
 	}
 `;

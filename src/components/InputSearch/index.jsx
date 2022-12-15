@@ -3,7 +3,7 @@ import { StyledInputSearch } from "./styles";
 import searchIcon2 from "../../assets/img/searchIcon2.svg"
 
 export function InputSearch({
-	filter,
+	display,
 	setFilter,
 	product,
 	inputValue,
@@ -25,7 +25,7 @@ export function InputSearch({
 	}
 
 	return (
-		<StyledInputSearch onSubmit={filterProduct}>
+		<StyledInputSearch display={display} onSubmit={filterProduct}>
 			<input
 				defaultValue={inputValue}
 				id="input"

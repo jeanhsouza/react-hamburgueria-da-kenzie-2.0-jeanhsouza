@@ -1,11 +1,11 @@
 import { Button } from "../../Button";
 import { StyledTotalCart } from "./styles";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export function TotalCart({ cart, setCart }) {
 	const totalValue = cart.reduce((acc, actualValue) => {
-		return acc + Number(actualValue.price);
+		return acc + (Number(actualValue.price) * actualValue.count);
 	}, 0);
 
 	function removeAll() {
@@ -17,7 +17,6 @@ export function TotalCart({ cart, setCart }) {
 
 	return (
 		<StyledTotalCart>
-			<ToastContainer />
 			<div className="TextValue">
 				<h3>Total</h3>
 				<span>

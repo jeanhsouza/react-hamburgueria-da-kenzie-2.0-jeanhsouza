@@ -20,25 +20,56 @@ export const StyledHeader = styled.header`
 			display: flex;
 			gap: 16px;
 
-			>img{
+			> img {
 				cursor: pointer;
 			}
 		}
 	}
 
+	.cartIconBox {
+		position: relative;
+
+		cursor: pointer;
+		> span {
+			position: absolute;
+			top: -8px;
+			right: -8px;
+			color: var(--white100);
+			padding: 5px;
+			background-color: var(--brand100);
+			border-radius: 7px;
+			font-weight: var(--font-weight-1);
+			font-size: 14px;
+		}
+	}
+
+	.exitInputModal {
+			background-color: transparent;
+			cursor: pointer;
+		}
+
 	@media (min-width: 900px) {
 		padding-top: 12px;
 		padding-bottom: 12px;
 
-		.searchIcon{
+		> div {
+			> form {
+				display: none;
+			}
+		}		
+
+		.searchIcon {
 			display: none;
+		}
+		.cartIconBox {
+			> span {
+				top: 10px;
+			}
 		}
 
 		div:nth-child(1) {
 			display: flex;
 			justify-content: space-between;
 		}
-
-		
 	}
 `;
