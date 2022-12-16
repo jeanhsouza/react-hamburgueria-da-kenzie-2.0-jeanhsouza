@@ -1,13 +1,14 @@
-import { AuthProvider } from "./AuthContext/AuthContext";
+import { AuthProvider } from "./AuthContext";
+import { DashProvider } from "./DashContext";
 
-interface iProviderProps{
-    children: React.ReactNode;
+interface iProviderProps {
+	children: React.ReactNode;
 }
 
 export function Providers({ children }: iProviderProps) {
 	return (
 		<AuthProvider>
-			{children}
+			<DashProvider>{children}</DashProvider>
 		</AuthProvider>
 	);
 }

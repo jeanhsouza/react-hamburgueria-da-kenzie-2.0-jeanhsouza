@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "./loginSchema";
 import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 
 export interface iLoginFormData {
 	email: string;
@@ -17,7 +17,7 @@ export interface iLoginFormData {
 }
 
 export function Login() {
-	const {loading, RegisterLink , submitLogin} = useContext(AuthContext)
+	const { loading, RegisterLink, submitLogin } = useContext(AuthContext);
 
 	const {
 		register,

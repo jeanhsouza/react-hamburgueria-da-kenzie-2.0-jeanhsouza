@@ -1,28 +1,11 @@
 import { Button } from "../Button";
 import { StyledInputSearch } from "./styles";
-import searchIcon2 from "../../assets/img/searchIcon2.svg"
+import searchIcon2 from "../../assets/img/searchIcon2.svg";
+import { DashContext } from "../../context/DashContext";
+import { useContext } from "react";
 
-export function InputSearch({
-	display,
-	setFilter,
-	product,
-	inputValue,
-	setInputValue,
-}) {
-	function filterProduct(e) {
-		e.preventDefault();
-		const searchValue = e.target[0].value;
-		setInputValue(searchValue);
-
-		const filterItems = product.filter((elem) => {
-			return (
-				elem.name.toLowerCase().includes(searchValue.toLowerCase().trim()) ||
-				elem.category.toLowerCase().includes(searchValue.toLowerCase().trim())
-			);
-		});
-		console.log(e.target[0].value.length);
-		searchValue.length === 0 ? setFilter(product) : setFilter(filterItems);
-	}
+export function InputSearch({ display }) {
+	const { filterProduct, inputValue } = useContext(DashContext);
 
 	return (
 		<StyledInputSearch display={display} onSubmit={filterProduct}>
@@ -32,7 +15,9 @@ export function InputSearch({
 				type="text"
 				placeholder="Digitar Pesquisa..."
 			/>
-			<Button buttonSize="default" buttonStyle="brand1"><img src={searchIcon2} alt="searchIcon2" /></Button>
+			<Button buttonSize="default" buttonStyle="brand1">
+				<img src={searchIcon2} alt="searchIcon2" />
+			</Button>
 		</StyledInputSearch>
 	);
 }
