@@ -7,8 +7,8 @@ interface iProviderProps {
 
 export function Providers({ children }: iProviderProps) {
 	return (
-		<AuthProvider>
-			<DashProvider>{children}</DashProvider>
-		</AuthProvider>
+		<DashProvider>
+			<AuthProvider>{children}</AuthProvider>
+		</DashProvider>
 	);
 }

@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { SubmitHandler } from "react-hook-form";
+import { SubmitHandler, UseFormHandleSubmit, UseFormRegister } from "react-hook-form";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
@@ -25,8 +25,8 @@ interface iDashContextValues {
 	clearSearch: () => void;
 	openInputModal: () => void;
 	closeInputModal: () => void;
-	register: any;
-	handleSubmit: any;
+	register: UseFormRegister<iInputSearchFormData>;
+	handleSubmit: UseFormHandleSubmit<iInputSearchFormData>;
 }
 
 export interface iDashContextProps {
@@ -71,16 +71,18 @@ export function DashProvider({ children }: iDashContextProps) {
 	useEffect(() => {
 		async function requestAPI() {
 			const token = localStorage.getItem("@kenzieBurger:token");
-			const request = await api.get("products", {
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			});
 			try {
-				const response = request.data;
-
-				setProduct(response);
-				setFilter(response);
+				if(token){
+					const request = await api.get("products", {
+						headers: {
+							Authorization: `Bearer ${token}`,
+						},
+					});
+					const response = request.data;
+	
+					setProduct(response);
+					setFilter(response);
+				}
 			} catch (error) {
 				console.log(error);
 				navigate("/login");
