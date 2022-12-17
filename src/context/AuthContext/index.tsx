@@ -51,7 +51,10 @@ export function AuthProvider({ children }: iAuthContextProps) {
 			});
 
 			localStorage.setItem("@kenzieBurger:token", accessToken);
-			navigate("/dashboard");
+			setTimeout(() => {
+				navigate("/dashboard");
+			}, 2000);
+
 		} catch (error) {
 			toast.error("Ops! Algo deu errado", {
 				position: toast.POSITION.TOP_RIGHT,
@@ -75,7 +78,9 @@ export function AuthProvider({ children }: iAuthContextProps) {
 				position: toast.POSITION.TOP_RIGHT,
 			});
 			if (request) {
-				navigate("/login");
+				setTimeout(() => {
+					navigate("/login");
+				}, 2000);
 			}
 		} catch (error) {
 			toast.error("Ops! Algo deu errado", {
