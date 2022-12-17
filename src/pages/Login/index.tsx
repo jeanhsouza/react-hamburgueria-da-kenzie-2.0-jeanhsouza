@@ -63,7 +63,7 @@ export function Login() {
 					/>
 					{errors.password?.message && <span>{errors.password.message}</span>}
 					<Button type="submit" buttonSize="medium" buttonStyle="brand1">
-						Logar
+						{loading? "Logando..." : "Logar"}
 					</Button>
 				</Form>
 				<span>

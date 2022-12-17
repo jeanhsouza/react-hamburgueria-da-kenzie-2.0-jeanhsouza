@@ -1,6 +1,10 @@
 import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { SubmitHandler, UseFormHandleSubmit, UseFormRegister } from "react-hook-form";
+import {
+	SubmitHandler,
+	UseFormHandleSubmit,
+	UseFormRegister,
+} from "react-hook-form";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
@@ -11,7 +15,6 @@ interface iDashContextValues {
 	cart: iCartItems[];
 	filter: iProductItems[];
 	inputValue: string;
-	counterCart: number;
 	inputModal: boolean;
 	screen: number;
 	openModal: () => void;
@@ -62,7 +65,6 @@ export function DashProvider({ children }: iDashContextProps) {
 	const [cart, setCart] = useState<iCartItems[]>([]);
 	const [filter, setFilter] = useState<iProductItems[]>([]);
 	const [inputValue, setInputValue] = useState("");
-	const [counterCart, setcounterCart] = useState(0);
 	const [inputModal, setInputModal] = useState(false);
 	const [screen, setscreen] = useState(900);
 	const navigate = useNavigate();
@@ -72,14 +74,14 @@ export function DashProvider({ children }: iDashContextProps) {
 		async function requestAPI() {
 			const token = localStorage.getItem("@kenzieBurger:token");
 			try {
-				if(token){
+				if (token) {
 					const request = await api.get("products", {
 						headers: {
 							Authorization: `Bearer ${token}`,
 						},
 					});
 					const response = request.data;
-	
+
 					setProduct(response);
 					setFilter(response);
 				}
@@ -93,8 +95,6 @@ export function DashProvider({ children }: iDashContextProps) {
 	}, [navigate]);
 
 	useEffect(() => {
-		setcounterCart(cart.length);
-
 		if (cart.length > 0) {
 			setIsOpen(true);
 		} else {
@@ -223,7 +223,6 @@ export function DashProvider({ children }: iDashContextProps) {
 				cart,
 				filter,
 				inputValue,
-				counterCart,
 				inputModal,
 				screen,
 				openModal,

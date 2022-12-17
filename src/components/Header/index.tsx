@@ -12,12 +12,15 @@ import { AuthContext } from "../../context/AuthContext";
 export function Header() {
 	const {
 		openModal,
-		counterCart,
 		inputModal,
 		openInputModal,
-		closeInputModal,
+		closeInputModal,cart,
 	} = useContext(DashContext);
 	const { Logout } = useContext(AuthContext);
+
+	const counterCart = cart.reduce((acc, actualValue)=>{
+		return acc + actualValue.count;
+	},0)
 
 	return (
 		<StyledHeader>

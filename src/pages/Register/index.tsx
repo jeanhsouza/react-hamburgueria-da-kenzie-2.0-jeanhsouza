@@ -91,7 +91,7 @@ export function Register() {
 						<span>{errors.samePassword.message}</span>
 					)}
 					<Button type="submit" buttonSize="medium" buttonStyle="solid1">
-						Cadastrar
+					{loading? "Cadastrando..." : "Cadastrar"}
 					</Button>
 				</Form>
 			</StyledAcessSection>
