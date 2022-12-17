@@ -32,7 +32,7 @@ export const StyledCoverSection = styled.section`
 		}
 	}
 
-	.bagBox {		
+	.bagBox {
 		border: 1px solid var(--gray300);
 		box-shadow: 0px 4px 40px -20px rgba(0, 0, 0, 0.25);
 		border-radius: 5px;
@@ -63,7 +63,6 @@ export const StyledCoverSection = styled.section`
 
 	@media (min-width: 900px) {
 		width: 400px;
-		
 	}
 `;
 
@@ -97,6 +96,5 @@ export const StyledAcessSection = styled.section`
 
 	@media (min-width: 900px) {
 		width: 400px;
-		
 	}
 `;

@@ -18,8 +18,8 @@ export function Dashboard() {
 			<Header />
 			<ContainerMain>
 				<section className="sectionProducts">
-					{inputValue?.trim().length !== 0 && <SearchContent/>}
-					<ProductList/>
+					{inputValue?.trim().length !== 0 && <SearchContent />}
+					<ProductList />
 				</section>
 			</ContainerMain>
 		</StyledDashboard>

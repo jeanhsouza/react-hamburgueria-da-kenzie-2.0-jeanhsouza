@@ -20,7 +20,7 @@ export const CartBox = styled.div`
 			color: var(--gray400);
 		}
 
-		>button{
+		> button {
 			background-color: transparent;
 			color: var(--white100);
 		}

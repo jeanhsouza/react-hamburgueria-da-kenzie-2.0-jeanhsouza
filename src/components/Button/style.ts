@@ -17,11 +17,11 @@ export const StyledButton = styled.button<iStyledButtonProps>`
 		switch (buttonSize) {
 			case "default":
 				return css`
-                padding: 6px 10px;
+					padding: 6px 10px;
 				`;
 			case "medium":
 				return css`
-                padding: 10px;
+					padding: 10px;
 				`;
 		}
 	}}
@@ -57,7 +57,7 @@ export const StyledButton = styled.button<iStyledButtonProps>`
 						background: var(--brand100);
 						color: var(--white100);
 					}
-				`;	
+				`;
 		}
 	}}
 `;

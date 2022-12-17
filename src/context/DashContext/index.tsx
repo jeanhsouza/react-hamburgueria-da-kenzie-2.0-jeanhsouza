@@ -1,20 +1,72 @@
 import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { SubmitHandler } from "react-hook-form";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
 
-export const DashContext = createContext();
+interface iDashContextValues {
+	product: iProductItems[];
+	isOpen: boolean;
+	cart: iCartItems[];
+	filter: iProductItems[];
+	inputValue: string;
+	counterCart: number;
+	inputModal: boolean;
+	screen: number;
+	openModal: () => void;
+	closeModal: () => void;
+	addCart: (item: iProductItems) => void;
+	removeCart: (elem: iCartItems) => void;
+	removeItem: (elem: iCartItems) => void;
+	addItem: (elem: iCartItems) => void;
+	removeAll: () => void;
+	filterProduct: SubmitHandler<iInputSearchFormData>;
+	clearSearch: () => void;
+	openInputModal: () => void;
+	closeInputModal: () => void;
+	register: any;
+	handleSubmit: any;
+}
 
-export function DashProvider({ children }) {
-	const [product, setProduct] = useState([]);
+export interface iDashContextProps {
+	children: React.ReactNode;
+}
+
+export interface iCartItems {
+	id: number;
+	name: string;
+	category: string;
+	price: number;
+	img: string;
+	count: number;
+}
+
+export interface iProductItems {
+	id: number;
+	name: string;
+	category: string;
+	price: number;
+	img: string;
+}
+
+export interface iInputSearchFormData {
+	inputSearchValue: string;
+}
+
+export const DashContext = createContext({} as iDashContextValues);
+
+export function DashProvider({ children }: iDashContextProps) {
+	const [product, setProduct] = useState<iProductItems[]>([]);
 	const [isOpen, setIsOpen] = useState(false);
-	const [cart, setCart] = useState([]);
-	const [filter, setFilter] = useState([]);
+	const [cart, setCart] = useState<iCartItems[]>([]);
+	const [filter, setFilter] = useState<iProductItems[]>([]);
 	const [inputValue, setInputValue] = useState("");
 	const [counterCart, setcounterCart] = useState(0);
 	const [inputModal, setInputModal] = useState(false);
 	const [screen, setscreen] = useState(900);
 	const navigate = useNavigate();
+	const { register, handleSubmit, reset } = useForm<iInputSearchFormData>();
 
 	useEffect(() => {
 		async function requestAPI() {
@@ -28,6 +80,7 @@ export function DashProvider({ children }) {
 				const response = request.data;
 
 				setProduct(response);
+				setFilter(response);
 			} catch (error) {
 				console.log(error);
 				navigate("/login");
@@ -64,13 +117,13 @@ export function DashProvider({ children }) {
 		setIsOpen(false);
 	}
 
-	function addCart(item) {
-		const cartContains = cart.find((elem) => {
+	function addCart(item: iProductItems) {
+		const cartContains = cart.find((elem: iCartItems) => {
 			return elem.id === item.id;
 		});
 
 		if (cartContains) {
-			const updatedCart = cart.map((elem) =>
+			const updatedCart = cart.map((elem: iCartItems) =>
 				elem.id === item.id ? { ...elem, count: elem.count + 1 } : elem
 			);
 			toast.success("Produto adicionado ao carrinho!", {
@@ -85,7 +138,7 @@ export function DashProvider({ children }) {
 		}
 	}
 
-	function removeCart(elem) {
+	function removeCart(elem: iCartItems) {
 		const cardFilter = cart.filter((item) => {
 			return item !== elem;
 		});
@@ -97,10 +150,14 @@ export function DashProvider({ children }) {
 		setCart(cardFilter);
 	}
 
-	function removeItem(elem) {
-		const product = cart.find((item) => item.id === elem.id);
+	function removeItem(elem: iCartItems) {
+		const selectedItem = cart.find((item) => item.id === elem.id);
 
-		if (product.count <= 1) {
+		if (!selectedItem) {
+			return;
+		}
+
+		if (selectedItem.count <= 1) {
 			const updatedCart = cart.filter((item) => item.id !== elem.id);
 
 			setCart(updatedCart);
@@ -112,7 +169,7 @@ export function DashProvider({ children }) {
 		}
 	}
 
-	function addItem(elem) {
+	function addItem(elem: iCartItems) {
 		const updatedCart = cart.map((item) =>
 			item.id === elem.id ? { ...item, count: item.count + 1 } : item
 		);
@@ -126,9 +183,9 @@ export function DashProvider({ children }) {
 		setCart([]);
 	}
 
-	function filterProduct(e) {
-		e.preventDefault();
-		const searchValue = e.target[0].value;
+	const filterProduct: SubmitHandler<iInputSearchFormData> = (data) => {
+		const searchValue = data.inputSearchValue;
+
 		setInputValue(searchValue);
 
 		const filterItems = product.filter((elem) => {
@@ -139,14 +196,13 @@ export function DashProvider({ children }) {
 		});
 
 		searchValue.length === 0 ? setFilter(product) : setFilter(filterItems);
-	}
+	};
 
 	function clearSearch() {
-		const inputSearch = document.querySelector("#input");
-		inputSearch.value = "";
 		setInputValue("");
+		reset();
 		setFilter(product);
-	}	
+	}
 
 	function openInputModal() {
 		setInputModal(true);
@@ -178,6 +234,8 @@ export function DashProvider({ children }) {
 				clearSearch,
 				openInputModal,
 				closeInputModal,
+				register,
+				handleSubmit,
 			}}
 		>
 			{children}

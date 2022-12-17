@@ -2,11 +2,11 @@ import { useContext } from "react";
 import { Button } from "../../Button";
 import { StyledLi } from "./styles";
 import "react-toastify/dist/ReactToastify.css";
-import { DashContext } from "../../../context/DashContext";
+import { DashContext, iProductItems } from "../../../context/DashContext";
 
-export function Product({ elem }) {
+export function Product({ elem }: { elem: iProductItems }) {
 	const { addCart } = useContext(DashContext);
-	
+
 	return (
 		<StyledLi>
 			<div className="imgBox">
@@ -21,7 +21,11 @@ export function Product({ elem }) {
 						currency: "BRL",
 					})}
 				</span>
-				<Button buttonSize="medium" buttonStyle="solid2" click={()=>addCart(elem)}>
+				<Button
+					buttonSize="medium"
+					buttonStyle="solid2"
+					click={() => addCart(elem)}
+				>
 					Adicionar
 				</Button>
 			</div>

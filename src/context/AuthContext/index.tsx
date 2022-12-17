@@ -41,12 +41,11 @@ export function AuthProvider({ children }: iAuthContextProps) {
 		try {
 			setLoading(true);
 			const request = await api.post("login", data);
-			const response = await request.data;
+			const response = request.data;
 
-			const { accessToken, user } = response;
+			const { accessToken } = response;
 
 			localStorage.setItem("@kenzieBurger:token", accessToken);
-			localStorage.setItem("@kenzieBurger:userID", JSON.stringify(user));
 			navigate("/dashboard");
 		} catch (error) {
 			console.log(error);

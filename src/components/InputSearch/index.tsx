@@ -4,16 +4,16 @@ import searchIcon2 from "../../assets/img/searchIcon2.svg";
 import { DashContext } from "../../context/DashContext";
 import { useContext } from "react";
 
-export function InputSearch({ display }) {
-	const { filterProduct, inputValue } = useContext(DashContext);
+export function InputSearch({ display }: { display: string }) {
+	const { filterProduct, register,handleSubmit } = useContext(DashContext);
+	// const { register, handleSubmit, reset } = useForm<iInputSearchFormData>();
 
 	return (
-		<StyledInputSearch display={display} onSubmit={filterProduct}>
+		<StyledInputSearch display={display} onSubmit={handleSubmit(filterProduct)}>
 			<input
-				defaultValue={inputValue}
-				id="input"
 				type="text"
 				placeholder="Digitar Pesquisa..."
+				{...register("inputSearchValue")}
 			/>
 			<Button buttonSize="default" buttonStyle="brand1">
 				<img src={searchIcon2} alt="searchIcon2" />

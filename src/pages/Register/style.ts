@@ -62,7 +62,6 @@ export const StyledCoverSection = styled.section`
 
 	@media (min-width: 900px) {
 		width: 400px;
-		
 	}
 `;
 
@@ -71,7 +70,7 @@ export const StyledAcessSection = styled.section`
 	flex-direction: column;
 	gap: 25px;
 	padding: 30px 20px;
-	margin-top: 12px;	
+	margin-top: 12px;
 	max-width: 400px;
 
 	border: 2px solid var(--gray400);
@@ -104,6 +103,5 @@ export const StyledAcessSection = styled.section`
 
 	@media (min-width: 900px) {
 		width: 400px;
-		
 	}
 `;
