@@ -19,23 +19,23 @@ export const StyledInputSearch = styled.form<iInputSearchPros>`
 		border: 2px solid var(--gray100);
 	}
 
-	>input {
+	> input {
 		outline: none;
 		font-size: 16px;
 		width: 100%;
 	}
 
-	>button {
+	> button {
 		height: 40px;
 		position: absolute;
 		right: 8px;
 		top: 8px;
 		width: 53px;
-	}	
+	}
 
 	@media (min-width: 900px) {
 		display: flex;
-		width: 300px;		
+		width: 300px;
 
 		> input {
 			width: 100%;

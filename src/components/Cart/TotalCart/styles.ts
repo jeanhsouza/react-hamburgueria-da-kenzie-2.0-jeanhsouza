@@ -27,18 +27,4 @@ export const StyledTotalCart = styled.div`
 		line-height: 24px;
 		color: var(--gray200);
 	}
-
-	button {
-		background-color: var(--gray300);
-		color: var(--gray200);
-		font-weight: 600;
-		font-size: 16px;
-		line-height: 19px;
-		padding: 15px 0px;
-
-		:hover {
-			background-color: var(--gray200);
-			color: var(--gray300);
-		}
-	}
 `;

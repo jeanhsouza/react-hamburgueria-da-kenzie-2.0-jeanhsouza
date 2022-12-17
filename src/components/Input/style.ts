@@ -53,7 +53,7 @@ export const StyledInput = styled.div`
 
 	> input:required:invalid + label:before {
 		content: "*";
-	}	
+	}
 
 	> input:focus + label,
 	> input:not(:placeholder-shown) + label {

@@ -44,9 +44,9 @@ export const StyledHeader = styled.header`
 	}
 
 	.exitInputModal {
-			background-color: transparent;
-			cursor: pointer;
-		}
+		background-color: transparent;
+		cursor: pointer;
+	}
 
 	@media (min-width: 900px) {
 		padding-top: 12px;
@@ -56,7 +56,7 @@ export const StyledHeader = styled.header`
 			> form {
 				display: none;
 			}
-		}		
+		}
 
 		.searchIcon {
 			display: none;

@@ -1,19 +1,15 @@
+import { useContext } from "react";
 import { Button } from "../../Button";
 import { StyledTotalCart } from "./styles";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { DashContext } from "../../../context/DashContext";
 
-export function TotalCart({ cart, setCart }) {
+export function TotalCart() {
+	const { cart, removeAll } = useContext(DashContext);
+
 	const totalValue = cart.reduce((acc, actualValue) => {
-		return acc + (Number(actualValue.price) * actualValue.count);
+		return acc + Number(actualValue.price) * actualValue.count;
 	}, 0);
-
-	function removeAll() {
-		toast.success("Carrinho limpo com sucesso!", {
-			position: toast.POSITION.TOP_CENTER,
-		});
-		setCart([]);
-	}
 
 	return (
 		<StyledTotalCart>
@@ -26,7 +22,9 @@ export function TotalCart({ cart, setCart }) {
 					})}
 				</span>
 			</div>
-			<Button click={removeAll}>Remover todos</Button>
+			<Button buttonSize="medium" buttonStyle="solid1" click={removeAll}>
+				Remover todos
+			</Button>
 		</StyledTotalCart>
 	);
 }

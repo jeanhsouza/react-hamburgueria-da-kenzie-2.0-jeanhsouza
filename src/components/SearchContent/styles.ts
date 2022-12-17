@@ -19,13 +19,7 @@ export const StyledSearchContent = styled.div`
 		}
 	}
 
-	/* > button {
-		font-weight: 500;
-		font-size: 16px;
-		line-height: 17px;
-	} */
-
 	@media (min-width: 900px) {
-		flex-direction: row;		
+		flex-direction: row;
 	}
 `;

@@ -5,7 +5,5 @@ export const loginSchema = yup.object().shape({
 		.string()
 		.required("O campo 'e-mail' é obrigatório")
 		.email("Preencha um e-mail válido"),
-	password: yup
-		.string()
-		.required("O campo 'senha' é obrigatório"),
+	password: yup.string().required("O campo 'senha' é obrigatório"),
 });

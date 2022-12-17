@@ -66,5 +66,4 @@ export const StyledLi = styled.li`
 		font-size: 14px;
 		line-height: 17px;
 	}
-
-	`;
+`;

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledModal = styled.div`
 	position: fixed;
-	right	: 0;
+	right: 0;
 	z-index: 2;
 	width: 100vw;
 	height: 100vh;
@@ -10,6 +10,4 @@ export const StyledModal = styled.div`
 
 	display: flex;
 	justify-content: flex-end;
-
-	
 `;
