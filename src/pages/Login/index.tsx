@@ -10,6 +10,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "./loginSchema";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { StyledToastify } from "../../styles/toastify";
 
 export interface iLoginFormData {
 	email: string;
@@ -30,6 +31,7 @@ export function Login() {
 
 	return (
 		<StyledLogin>
+			<StyledToastify/>
 			<StyledCoverSection>
 				<img src={logo} alt="" />
 				<div className="bagBox">

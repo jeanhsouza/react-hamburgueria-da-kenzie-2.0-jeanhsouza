@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { iLoginFormData } from "../../pages/Login";
 import { iRegisterFormData } from "../../pages/Register";
 import { api } from "../../services/api";
+import { toast } from "react-toastify";
 
 interface iAuthContextProps {
 	children: React.ReactNode;
@@ -45,9 +46,16 @@ export function AuthProvider({ children }: iAuthContextProps) {
 
 			const { accessToken } = response;
 
+			toast.success("Login realizado com sucesso!", {
+				position: toast.POSITION.TOP_RIGHT,
+			});
+
 			localStorage.setItem("@kenzieBurger:token", accessToken);
 			navigate("/dashboard");
 		} catch (error) {
+			toast.error("Ops! Algo deu errado", {
+				position: toast.POSITION.TOP_RIGHT,
+			});
 			console.log(error);
 		} finally {
 			setLoading(false);
@@ -63,10 +71,16 @@ export function AuthProvider({ children }: iAuthContextProps) {
 		try {
 			setLoading(true);
 			const request = await api.post("users", data);
+			toast.success("Conta criada com sucesso!", {
+				position: toast.POSITION.TOP_RIGHT,
+			});
 			if (request) {
 				navigate("/login");
 			}
 		} catch (error) {
+			toast.error("Ops! Algo deu errado", {
+				position: toast.POSITION.TOP_RIGHT,
+			});
 			console.log(error);
 		} finally {
 			setLoading(false);

@@ -15,6 +15,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchema } from "./registerSchema";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { StyledToastify } from "../../styles/toastify";
 
 export interface iRegisterFormData {
 	name: string;
@@ -37,6 +38,7 @@ export function Register() {
 
 	return (
 		<StyledRegister>
+			<StyledToastify/>
 			<StyledCoverSection>
 				<img src={logo} alt="" />
 				<div className="bagBox">
