@@ -85,6 +85,7 @@ export function DashProvider({ children }: iDashContextProps) {
 				}
 			} catch (error) {
 				console.log(error);
+				localStorage.clear();
 				navigate("/login");
 			}
 		}
